@@ -1,0 +1,12 @@
+﻿{
+  "name": "Ubiquity for Chrome",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "A Mozilla Ubiquity clone for Google Chrome.",
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["jquery-1.8.0.min.js", "constants.js", "ubiquity.js", "CmdUtil.js", "Command.js"]
+    }
+  ]
+}

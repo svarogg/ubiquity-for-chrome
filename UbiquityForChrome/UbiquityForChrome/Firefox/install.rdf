@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns="http://www.mozilla.org/2004/em-rdf#">
+  <rdf:Description about="urn:mozilla:install-manifest">
+    <id>ubiquity@labs.mozilla.com</id>
+    <version>0.6.1pre.20120525</version>
+    <type>2</type>
+    <unpack>true</unpack>
+
+    <!-- Target Application this extension can install into,
+         with minimum and maximum supported versions. -->
+    <targetApplication><rdf:Description>
+      <!--Firefox--><id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</id>
+      <minVersion>8.0</minVersion>
+      <maxVersion>15.*</maxVersion>
+    </rdf:Description></targetApplication>
+
+    <!-- Front End MetaData -->
+    <name>Ubiquity</name>
+    <description>An extension that allows for the use of dynamic commands in Firefox.</description>
+    <creator>Mozilla Corporation</creator>
+    <iconURL>chrome://ubiquity/skin/icons/ubiquibot-square.png</iconURL>
+    <homepageURL>http://ubiquity.mozilla.com</homepageURL>
+    <updateURL>http://cdn.bitbucket.org/satyr/ubiquity/downloads/update.rdf</updateURL>
+    <updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8fk8NSQGhbBEdypCAaJ4npkkgeJ4Qx7hyl2Fwsu5Afx8WOOK9kX/EQ+L1ZAhVH/JDOvd7H6LM41iN3bLrFcEnYc+n+G7Vtf71F2+8mxA3MqjdidkwUvag7n6wq0sDzpPSeKMjqUIb1V6lrZMMVZY5vcpSBsaUl7/L5Xt3ejH4YwIDAQAB</updateKey>
+    <optionsURL>chrome://ubiquity/content/preferences.xul</optionsURL>
+
+    <translator>egamonal, toniher (ca)</translator>
+    <translator>cers (da-DK)</translator>
+    <translator>cmos (de)</translator>
+    <translator>queltosh (es-ES)</translator>
+    <translator>JTojnar (cs-CZ)</translator>
+    <translator>AtteL (fi-FI)</translator>
+    <translator>ccorazza, Frederic, Goofy, myahoo (fr)</translator>
+    <translator>moZes (fy-NL)</translator>
+    <translator>kkemenczy (hu)</translator>
+    <translator>gialloporpora (it-IT)</translator>
+    <translator>mar, powchin, satyr (ja)</translator>
+    <translator>nathansamson (nl)</translator>
+    <translator>teo (pl-PL)</translator>
+    <translator>camponez (pt)</translator>
+    <translator>brunomagrani, fernph (pt-BR)</translator>
+    <translator>mrfyda (pt-PT)</translator>
+    <translator>Quicksilver tears, SeLarin (ru-RU)</translator>
+    <translator>yfdyh000 (zh-CN)</translator>
+    <translator>kourge (zh-TW)</translator>
+  </rdf:Description>
+</rdf:RDF>

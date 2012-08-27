@@ -1,0 +1,1389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Ubiquity Web Search Commands</title>
+  <link rel="commands" href="search.xhtml"/>
+</head>
+<style>
+  div[id] {display: none}
+  script {display: block; white-space: pre; font-family: monospace}
+</style>
+<body>
+<p>This XHTML feed contains commands for searching the Web.</p>
+
+<div id="google-search">
+{if results.length}
+{for result in results}
+<div class="gresult">
+  <div>
+    ${result.key}: <a href="${result.unescapedUrl}" accesskey="${result.key}">${result.title}</a>
+  </div>
+  <div class="gresult-content">${result.content}</div>
+  <div class="gresult-url">${result.visibleUrl}</div>
+</div>
+{/for}
+<small>${tipsMessage}</small>
+{else}
+${noResultsMessage}
+{/if}
+</div>
+
+<div id="amazon-search">
+<style>
+  ol, ul {list-style: none; margin: 0; padding: 0}
+  img {float: right; margin: 0 0 0.5em 0.5em}
+  kbd {vertical-align: middle; text-transform: uppercase}
+  kbd:after {content: ":"}
+  kbd, .price {font-weight: bolder}
+  .item {margin-top: 0.4em; clear: right}
+  .feature {margin-top: 0.2em}
+  .price, .author, .label, .feature {font-size: 88%}
+  .author:before {content: "by "}
+  .feature:before {content: "\2022  "}
+</style>
+${matchMessage}
+<ol>
+{for item in items}
+  <li class="item">
+    {if item.image}
+      <a href="${item.url}"><img src="${item.image.src}" border="0"
+        height="${item.image.height}" width="${item.image.width}"/></a>
+    {/if}
+    <kbd>${item.key}</kbd>
+    <a href="${item.url}" accesskey="${item.key}">${item.title}</a>
+    {if item.price}
+      <nobr class="price">
+        ${item.price.amount} (${item.price.currency})
+      </nobr>
+    {/if}
+    {if item.author}
+      <div class="author">${item.author}</div>
+    {/if}
+    {if item.label}
+      <div class="label">${item.label}</div>
+    {/if}
+    <ul>
+    {for feature in item.features}
+      <li class="feature">${feature}</li>
+    {/for}
+    </ul>
+  </li>
+{/for}
+</ol>
+</div>
+
+<div id="flickr-search">
+<b>${foundMessage}</b><br/><br/>
+<table style="border-width: 0px;">
+{for photo in photos}
+  {if photo_index % numcols == 0}
+  <tr height="100">
+  {/if}
+  <td>
+    <a href="http://www.flickr.com/photos/${photo.owner}/${photo.id}" title="${photo.title|escape}">
+      <img src="http://farm${photo.farm}.static.flickr.com/${photo.server}/${photo.id}_${photo.secret}_t.jpg" />
+    </a>
+  </td>
+  {if photo_index % numcols == (numcols - 1)}
+  </tr>
+  {/if}
+{/for}
+</table>
+</div>
+
+<div id="weather-search">
+  <style>
+  .mainimg { float: left }
+  .weather { font-family: arial, helvetica, sans-serif }
+  .forecast { clear: both }
+  .forecast th, .forecast td { text-align: center }
+  .forecast .icon { text-align: right }
+  .forecast img { width: 75% }
+  .temp { font-size: 60px }
+  .high { color: #f66 }
+  .low  { color: #66f }
+  </style>
+  <div class="weather">
+    ${weatherMessage}<br />
+    {if w.img}<img class="mainimg" src="${w.img}"/>{/if}
+    <div class="temp">${w.temp}</div>
+    <div class="extra">
+      ${w.condition}<br/>
+      ${w.wind}<br/>
+      ${w.humidity}<br/>
+    </div>
+    <table class="forecast">
+    <tr>{for day in w.forecast}
+      <td class="icon">{if day.img}<img src="${day.img}"/>{/if}</td>
+    {/for}</tr>
+    <tr>{for day in w.forecast}
+      <th class="label">${day.label}</th>
+    {/for}</tr>
+    <tr>{for day in w.forecast}
+      <td class="condition">${day.condition}</td>
+    {/for}</tr>
+    <tr>{for day in w.forecast}
+      <td class="high">${day.high}</td>
+    {/for}</tr>
+    <tr>{for day in w.forecast}
+      <td class="low">${day.low}</td>
+    {/for}</tr>
+    </table>
+  </div>
+</div>
+
+<div id="wikipedia-search">
+<style>
+.wikipedia { margin: 0 }
+.title { clear: left; margin-top: 0.4em }
+.title a { font-weight: bold }
+.key:after {content: ":"}
+.summary { margin: 0.2em 0 0 1em; font-size: smaller }
+.thumbnail {
+  float: left; max-width: 80px; max-height: 80px; background-color: white;
+  margin-right: 0.2em;
+}
+</style>
+<dl class="wikipedia">
+${foundMessage}
+{for article in results}
+  <dt class="title">
+    <span class="key">${article.key}</span>
+    <a href="${article.title|wikilink}" accesskey="${article.key}"
+    >${article.title}</a>
+  </dt>
+  <dd class="summary" wikiarticle="${article.title}">
+    <i>${retrievingArticleSummary}</i>
+  </dd>
+{forelse}
+  <p class='error'>${noArticlesFound}</p>
+{/for}
+</dl>
+</div>
+
+<div id="yelp-search">
+<style>
+.biz {
+  margin-bottom: 10px;
+}
+
+.name{ font-size: 120%;}
+
+.biz a {
+  color: #0066cc;
+  text-decoration: underline;
+  font-size: small;
+}
+
+.biz img{ position: relative; top: 15px;}
+
+.content {
+  margin-right: 10px;
+  font-size: x-small;
+}
+</style>
+
+{for biz in businesses}
+<div class="biz">
+  <img src="${biz.photo_url_small}" height="40" width="40"/>
+  ${biz|yelpBusiness}
+</div>
+{/for}
+</div>
+<div id="youtube-search">
+  <p>
+   Found <b>${numresults}</b> YouTube Videos matching <b>${query}</b>
+  </p>
+  {for entry in results}
+  <div style="display: block; margin-bottom: 10px; clear: both;" >
+   <a style="color: blue; font-size: 14px;" href="${entry.link[0].href}">
+   <img style="float:left; margin-right: 10px; border:thin solid white; height: ${entry['media$group']['media$thumbnail'][0].height}px; width: ${entry['media$group']['media$thumbnail'][0].width}px;"
+   src="${entry['media$group']['media$thumbnail'][0].url}" />
+   ${entry.title.$t}
+   </a>
+   <br/>
+   <small>${entry['media$group']['yt$duration'].seconds} seconds</small>
+   <p>
+     <!-- TODO: for some stupid reason, this doesn't work or am I missing something? -->
+     <!-- {if entry.content.$t.length > 300}
+         ${entry.content.$t.substr(0,300)} ...
+      {else}
+         ${entry.content.$t}
+      {/if} -->
+
+      ${entry.content.$t.substr(0,300)}
+   </p>
+  </div>
+  {/for}
+  <br/><br/>
+</div>
+
+<script type="?" class="commands"><![CDATA[
+
+const SEARCH_TERM = _("search term");
+
+// TODO this should use a provider plugin
+CmdUtils.CreateCommand({
+  names: ["search", "find", "look for"],
+  description: "Search using your installed search engines",
+  help: "Specify any Open Search engine you have installed by entering " +
+        "e.g. 'search with google', 'search with yahoo', etc.",
+  icon: "chrome://ubiquity/skin/icons/search.png",
+  arguments: [
+    {role: "object", nountype: noun_arb_text, label: SEARCH_TERM},
+    {role: "instrument", nountype: noun_type_search_engine},
+  ],
+  preview: function search_preview(previewBlock, {object, instrument}) {
+    previewBlock.innerHTML = _(
+      "Search using <b>${engine}</b> for:<br /><b>${query}</b>",
+      {engine: instrument.data.name, query : object.text});
+  },
+  execute: function search_execute({object, instrument}) {
+    var submission = instrument.data.getSubmission(object.text, null);
+    Utils.openUrlInBrowser(submission.uri.spec, submission.postData);
+  }
+});
+
+CmdUtils.makeSearchCommand({
+  names: ["Google"],
+  url: "http://www.google.com/search?q={QUERY}",
+  icon: "chrome://ubiquity/skin/icons/google.ico",
+  description: "Searches Google for your words.",
+  help: "You can use the keyboard shortcut ctrl + alt + number to open one " +
+        "of the Google results shown in the preview.",
+  preview: function google_preview(pblock, {object}) {
+    var searchTerm = object.text;
+    // Don't even display any text before fetching search results,
+    // since the results come back nearly instantaneously. In the
+    // future, we can display a throbber.
+    if (!searchTerm) return void this.previewDefault(pblock);
+
+    var url = "http://ajax.googleapis.com/ajax/services/search/web";
+    var params = {v: "1.0", q: searchTerm, rsz: "small"};
+
+    CmdUtils.previewGet(pblock, url, params, function google_get(data) {
+      var {results} = data.responseData;
+      results.forEach(function (r, i) { r.key = i + 1 });
+
+      var noResultsMessage = _(
+        "Your search - ${searchTerm} - did not match any documents.",
+        {searchTerm: object.html.bold()});
+      var tipsMessage = _(
+        "Tip: You can go to any result in this preview by pressing " +
+        "control, alt, and the result number at the same time.");
+
+      pblock.innerHTML = CmdUtils.renderTemplate(
+        feed.dom.getElementById("google-search").innerHTML,
+        { results: results,
+          noResultsMessage: noResultsMessage,
+          tipsMessage: tipsMessage });
+    }, "json");
+  }
+});
+
+const ARTICLE_ERROR = _("Error retrieving summary");
+
+function fetchWikipediaArticle(previewBlock, articleTitle, langCode) {
+  var apiUrl = "http://" + langCode + ".wikipedia.org/w/api.php";
+  var apiParams = {
+    format: "json",
+    action: "parse",
+    page: articleTitle
+  };
+
+  CmdUtils.previewAjax(previewBlock, {
+    type: "GET",
+    url: apiUrl,
+    data: apiParams,
+    dataType: "json",
+    error: function() {
+      previewBlock.innerHTML = "<p class='error'>" + ARTICLE_ERROR + "</p>";
+    },
+    success: function(responseData) {
+      //remove relative <img>s beforehand to suppress
+      //the "No chrome package registered for ..." message
+      var parse = jQuery(("<div>" + responseData.parse.text["*"])
+                         .replace(/<img src="\/[^>]+>/g, ""));
+      //take only the text from summary because links won't work either way
+      var articleSummary = parse.find("p:first").text();
+      //remove citations [3], [citation needed], etc.
+      articleSummary = articleSummary.replace(/\[.+?\]/g, "");
+      //TODO: also remove audio links (.audiolink & .audiolinkinfo)
+      //TODO: remove "may refer to" summaries
+      var articleImageSrc = (parse.find(".infobox img").attr("src") ||
+                             parse.find(".thumbimage") .attr("src") || "");
+      previewBlock.innerHTML = (
+        (articleImageSrc &&
+         <img src={articleImageSrc} class="thumbnail"/>.toXMLString()) +
+        Utils.escapeHtml(articleSummary));
+    }
+  });
+}
+
+CmdUtils.CreateCommand({
+  names: ["Wikipedia", "lookup"],
+  arguments: [
+    {role: "object", nountype: noun_arb_text, label: SEARCH_TERM},
+    {role: "format", nountype: noun_type_lang_wikipedia}],
+  homepage: "http://theunfocused.net/moz/ubiquity/verbs/",
+  author: {name: "Blair McBride", email: "blair@theunfocused.net"},
+  contributors: ["Viktor Pyatkovka"],
+  license: "MPL",
+  icon: "chrome://ubiquity/skin/icons/wikipedia.ico",
+  description: "Searches Wikipedia for your words, in a given language.",
+  preview: function wikipedia_preview(previewBlock, args) {
+    var searchText = Utils.trim(args.object.text);
+    if (!searchText) {
+      previewBlock.innerHTML = _("Searches Wikipedia in ${lang}.",
+                                 {lang: args.format.html || "English"});
+      return;
+    }
+    var previewData = {query: args.object.html};
+    previewBlock.innerHTML = _("Searching Wikipedia for <b>${query}</b> ...",
+                               previewData);
+    var apiParams = {
+      format: "json",
+      action: "query",
+      list: "search",
+      srlimit: 5, // is this a good limit?
+      srwhat: "text",
+      srsearch: searchText
+    };
+
+    function onerror() {
+      previewBlock.innerHTML =
+        "<p class='error'>" + _("Error searching Wikipedia") + "</p>";
+    }
+
+    var langCode = args.format.data || "en";
+    var apiUrl = "http://" + langCode + ".wikipedia.org/w/api.php";
+
+    CmdUtils.previewAjax(previewBlock, {
+      type: "GET",
+      url: apiUrl,
+      data: apiParams,
+      dataType: "json",
+      error: onerror,
+      success: function wikipedia_success(searchResponse) {
+        if (!("query" in searchResponse && "search" in searchResponse.query)) {
+          onerror();
+          return;
+        }
+
+        function generateWikipediaLink(title) (
+          "http://" + langCode + ".wikipedia.org/wiki/" +
+          title.replace(/ /g, "_"));
+
+        (previewData.results = searchResponse.query.search)
+          .forEach(function genKey(o, i) { o.key = i + 1 });
+        previewData._MODIFIERS = {wikilink: generateWikipediaLink};
+        previewData.foundMessage =
+          _("Wikipedia articles found matching <b>${query}</b>:", previewData);
+        previewData.retrievingArticleSummary =
+          _("Retreiving article summary...");
+        previewData.noArticlesFound = _("No articles found.");
+
+
+        previewBlock.innerHTML = CmdUtils.renderTemplate(
+          feed.dom.getElementById("wikipedia-search").innerHTML,
+          previewData);
+
+        jQuery("dd", previewBlock).each(function eachDD() {
+          var article = this.getAttribute("wikiarticle");
+          fetchWikipediaArticle(this, article, langCode);
+        });
+      }
+    });
+  },
+  execute: function wikipedia_execute(args) {
+    var lang = args.format.data || "en";
+    var searchUrl = "http://" + lang + ".wikipedia.org/wiki/Special:Search";
+    var searchParams = {search: args.object.text};
+    Utils.openUrlInBrowser(searchUrl + Utils.paramsToString(searchParams));
+  }
+});
+
+CmdUtils.makeSearchCommand({
+  names: ["IMDb", "internet movie database", "movie", "actor"],
+  url: "http://www.imdb.com/find?s=all&q={QUERY}",
+  defaultUrl: "http://www.imdb.com/",
+  icon: "chrome://ubiquity/skin/icons/imdb.ico",
+  parser: {
+    container: "#main > table > tbody > tr",
+    title: "td + td + td > a",
+    thumbnail: "td:first > a > img",
+    body: "td + td + td > a ~ *",
+    maxResults: 8,
+  },
+});
+
+CmdUtils.makeSearchCommand({
+  names: ["Yahoo!"],
+  url: "http://search.yahoo.com/search?ei=UTF-8&p={QUERY}",
+  defaultUrl: "http://www.yahoo.com",
+  icon: "chrome://ubiquity/skin/icons/yahoo.ico",
+  description: "Searches <a href='http://search.yahoo.com'>Yahoo!</a> " +
+               "for pages matching your words.",
+  parser: {
+    container  : ".res",
+    title      : "h3",
+    body       : ".abstr, .sm-abs",
+    maxResults : 10,
+  },
+});
+
+var noun_type_amazon_com_index = CmdUtils.NounType("index", {
+  All: 0,
+  Apparel: 15683091,
+  Automotive: 15690151,
+  Baby: 3760931,
+  Beauty: 11055981,
+  Books: 1000,
+  Classical: 301668,
+  DigitalMusic: 301668,
+  DVD: 130,
+  Electronics: 493964,
+  GourmetFood: 3580501,
+  Grocery: 10746371,
+  HealthPersonalCare: 3760931,
+  HomeGarden: 1063498,
+  Industrial: 228013,
+  Jewelry: 3880591,
+  Kitchen: 1063498,
+  Magazines: 44264011,
+  Merchants: 493964,
+  Miscellaneous: 349028011,
+  Music: 301668,
+  MusicalInstruments: 12923151,
+  OfficeProducts: 1084128,
+  OutdoorLiving: 1063498,
+  PCHardware: 493964,
+  PetSupplies: 13900811,
+  Photo: 13900861,
+  Shoes: 3375301,
+  Software: 409488,
+  SportingGoods: 1036682,
+  Tools: 228013,
+  Toys: 130,
+  VHS: 404272,
+  Video: 130,
+  VideoGames: 44263011,
+  Watches: 378516011,
+  Wireless: 408234,
+  WirelessAccessories: 408234,
+}, "All");
+
+var Amazon = "http://www.amazon.com/";
+var AmazLink = "Amazon.com".link(Amazon);
+var AWS_ENDPOINT = "ecs.amazonaws.com";
+var AWS_REQUESTURI = "/onca/xml";
+// This key is linked to Blair McBride's AWS account - and only free services are enabled.
+// Please don't re-use it or abuse it. Instead, get your own AWS key - its free.
+var AWS_KEY = "08WX39XKK81ZEWHZ52R2";
+var AWS_SECRET = "w0WOQNS+GZcJWjrAmlK885tFi6rcrr9WOgeu6eK3";
+
+function amazon_doEscape(aString) (
+  encodeURIComponent(aString)
+  .replace(/[!\'()*]+/g, function escape0(s) escape(s, 0)));
+function amazon_signRequest(aParams) {
+  var key;
+  var params = {};
+  for (key in aParams)
+    params[key] = aParams[key];
+  params.Timestamp = new Date().toISOString().slice(0, -5) + "Z";
+  params.AWSAccessKeyId = AWS_KEY;
+  var paramArray = [];
+  for (key in params)
+    paramArray.push(amazon_doEscape(key) + "=" + amazon_doEscape(params[key]));
+  paramArray.sort();
+  var paramString = paramArray.join("&");
+  var sigBaseString =
+    "GET\n" + AWS_ENDPOINT + "\n" + AWS_REQUESTURI + "\n" + paramString;
+  var signature = Utils.signHmac("SHA256", AWS_SECRET, sigBaseString);
+  return ("http://" + AWS_ENDPOINT + AWS_REQUESTURI + "?" +
+          paramString + "&Signature=" + amazon_doEscape(signature));
+}
+
+CmdUtils.CreateCommand({
+  names: ["Amazon.com"],
+  icon: "chrome://ubiquity/skin/icons/amazon.ico",
+  description: "Searches " + AmazLink + " for items matching your words.",
+  help: "" + <dl>
+    <dt>Available Indices</dt>{
+      // `[].concat` to workaround E4X-Proxy conundrum
+      [].concat(noun_type_amazon_com_index._list)
+        .reduce(function (dd, s) dd.appendChild(<b>{s.text}</b>), <dd/>)
+    }
+  </dl>,
+  arguments: [
+    {role: "object", nountype: noun_arb_text, label: SEARCH_TERM},
+    {role: "format", nountype: noun_type_amazon_com_index}],
+  execute: function amazon_execute({object: {text}, format: {data}}) {
+    Utils.openUrlInBrowser(
+      Amazon + "s/ref=nb_ss_gw" +
+      Utils.paramsToString({url: "node=" + data, "field-keywords": text}));
+  },
+  preview: function(previewBlock,
+                    {object: {text, summary}, format: {text: searchIndex}}) {
+    if (!text) return void this.previewDefault(previewBlock);
+
+    var me = this;
+    previewBlock.innerHTML =
+      _("Searching ${AmazLink} for items matching <b>${query}</b>.",
+        {AmazLink: AmazLink, query: summary});
+    CmdUtils.previewAjax(previewBlock, {
+      url: amazon_signRequest({
+        Service: "AWSECommerceService",
+        Version: "2008-08-19",
+        Operation: "ItemSearch",
+        Condition: "All",
+        Merchant: "All",
+        ResponseGroup: "ItemAttributes,Images",
+        SearchIndex: searchIndex,
+        Keywords: text,
+      }),
+      dataType: "xml",
+      error: function amazon_error(xhr, info) {
+        previewBlock.innerHTML = (
+          "<p class='error'>" +
+          _("Error searching ${AmazLink}.", {AmazLink: AmazLink}) +
+          "<br/><em>" + xhr.status + " " + xhr.statusText +
+          " (" + info + ")</em></p>");
+        // TODO: think of a better way to localize API errors, if possible.
+      },
+      success: function amazon_success(responseData) {
+        responseData = jQuery(responseData);
+        var errorMessage = responseData.find("Error > Message").text();
+        if (errorMessage) {
+          previewBlock.innerHTML =
+            "<p class='error'>" + _(errorMessage) + "</p>";
+          return;
+        }
+        const MAX_RESULTS = 35; // 1 ~ 9, a ~ z
+        function iter(itemIndex) {
+          var itemDetails = jQuery(this),
+          itemAttrs = itemDetails.find("ItemAttributes"),
+          listPrice = itemAttrs.find("ListPrice"),
+          smallImage = itemDetails.find("SmallImage:first");
+          return {
+            title: itemAttrs.find("Title").text(),
+            url: itemDetails.find("DetailPageURL").text(),
+            key: (itemIndex + 1).toString(MAX_RESULTS + 1),
+            author: (itemAttrs.find("Author")
+                     .map(function() this.textContent).get().join(', ')),
+            features: (itemAttrs.find("Feature")
+                       .map(function() this.textContent).get()),
+            label: itemAttrs.find("Label").text(),
+            price: listPrice.length && {
+              amount: listPrice.find("FormattedPrice").text(),
+              currency: listPrice.find("CurrencyCode").text(),
+            },
+            image: smallImage.length && {
+              src: smallImage.find("URL").text(),
+              height: smallImage.find("Height").text(),
+              width: smallImage.find("Width").text(),
+            }
+          };
+        }
+        previewBlock.innerHTML = CmdUtils.renderTemplate(
+          feed.dom.getElementById("amazon-search").innerHTML,
+          { items: (responseData.find("Items > Item").slice(0, MAX_RESULTS)
+                    .map(iter).get()),
+            matchMessage: _(
+              ("Found <b>${numitems}</b> item{if numitems > 1}s{/if} on " +
+               "<a href='http://www.amazon.com/'>Amazon.com</a> " +
+               "matching <b>${query}</b>."),
+              { numitems: responseData.find("Items > TotalResults").text(),
+                query: text }) });
+      }
+    });
+  }
+});
+
+CmdUtils.CreateCommand({
+  names: ["VideoSurf", "videos"],
+  homepage: "http://www.videosurf.com/",
+  author: {name: "Udi Falkson", email: "udi@videosurf.com"},
+  description: "Performs a VideoSurf video search with advanced preview.",
+  help: ("Please email us at feedback@videosurf.com " +
+         "if you have any trouble or feature ideas!"),
+  icon: "chrome://ubiquity/skin/icons/videosurf.ico",
+  arguments: [{role: "object", nountype: noun_arb_text, label: SEARCH_TERM}],
+  preview: function vsurf_preview(pblock, {object: {text}}) {
+    pblock.innerHTML = _("Loading videos...");
+    var url = "http://www.videosurf.com/api/ext/services/ubiquityService.php";
+    $.get(url, {query: text}, function vsurf_success(response) {
+      pblock.innerHTML = response;
+      function getThumb(img) $("#vs_thumb_" + img.id.split("_")[2], pblock)[0];
+      var originalSrc = null;
+      $(".tiles li a img", pblock).hover(
+        function vsurf_mouseover({target: img}) {
+          var thumb = getThumb(img);
+          originalSrc = thumb.src;
+          thumb.src = img.src;
+        },
+        function vsurf_mouseout({target: img}) {
+          getThumb(img).src = originalSrc;
+        });
+    });
+  },
+  execute: function vsurf_execute({object: {text}}) {
+    Utils.openUrlInBrowser(
+      "http://www.videosurf.com/videos/" +
+      encodeURI(text.trim()).replace(/%20/g, "+") + "?vlt=ubiquity");
+  }
+});
+
+CmdUtils.makeSearchCommand({
+  names: ["YouTube"],
+  url: ("http://www.youtube.com/results?search_type=search_videos" +
+        "&search=Search&search_sort=relevance&search_query={QUERY}"),
+  icon: "chrome://ubiquity/skin/icons/youtube.ico",
+  description: ("Searches <a href='http://www.youtube.com'>YouTube</a> " +
+                "for videos matching your words. Previews the top results."),
+  preview: function(pblock, {object: {text, summary}}) {
+    if (!text) return void this.previewDefault(pblock);
+
+    pblock.innerHTML = _("Searches YouTube for ${it}.", {it: summary.bold()});
+    CmdUtils.previewGet(
+      pblock,
+      "http://gdata.youtube.com/feeds/api/videos",
+      {alt: "json", "max-results": 3, vq: text},
+      function youtube_success(data) {
+        pblock.innerHTML = CmdUtils.renderTemplate(
+          feed.dom.getElementById("youtube-search").innerHTML, {
+            results: data.feed.entry,
+            query: summary,
+            numresults: data.feed["openSearch$totalResults"]["$t"],
+          });
+      },
+      "json");
+  }
+});
+
+CmdUtils.makeSearchCommand({
+  names: ["Flickr", "images"],
+  url: "http://www.flickr.com/search/?w=all&q={QUERY}",
+  icon: "chrome://ubiquity/skin/icons/flickr.ico",
+  description: (
+    "Searches <a href=\"http://www.flickr.com\">Flickr</a> " +
+    "for pictures matching your keywords. Previews the top pictures."),
+  preview: function flickr_preview(previewBlock, {object: {text: inputText}}) {
+    if (!inputText) return void this.previewDefault(previewBlock);
+
+    previewBlock.innerHTML = _("Searching for photos on Flickr...");
+    CmdUtils.previewAjax(previewBlock, {
+      url: "http://api.flickr.com/services/rest/",
+      data: {
+        api_key: "4ca9aaaf5c2d83260eba9ab68ac1b1ac",
+        format: "json",
+        nojsoncallback: 1,
+        method: "flickr.photos.search",
+        media: "photos",
+        text: inputText,
+        per_page: 12,
+        sort: "relevance",
+      },
+      dataType: "json",
+      error: function flickr_error({statusText}) {
+        previewBlock.innerHTML = (
+          "<p class='error'>" + _("Error searching Flickr.") +
+          " (" + Utils.escapeHtml(statusText) + ")</p>");
+      },
+      success: function flickr_success(responseData) {
+        if (responseData.stat !== "ok") {
+          this.error({statusText: responseData.stat});
+          return;
+        }
+        previewBlock.innerHTML = CmdUtils.renderTemplate(
+          feed.dom.getElementById("flickr-search").innerHTML, {
+            numcols: 4,
+            photos: responseData.photos.photo,
+            foundMessage: _("${nummatches} photos were found on Flickr.",
+                            {nummatches: responseData.photos.total}),
+          });
+      },
+    });
+  },
+});
+
+CmdUtils.makeSearchCommand({
+  names: ["Bugzilla"],
+  url: "https://bugzilla.mozilla.org/buglist.cgi?quicksearch=%s",
+  defaultUrl: "https://bugzilla.mozilla.com",
+  help: "Bugzilla QuickSearch".link(
+    "https://bugzilla.mozilla.org/page.cgi?id=quicksearch.html"),
+  icon: "chrome://ubiquity/skin/icons/mozilla.ico",
+  preview: function bugz_preview(pb, args) {
+    var query = args.object.text.trim(), me = this;
+    if (!query) return void me.previewDefault(pb);
+    var shortUrl = "http://bugzil.la/" +
+      query.replace(/\S+/g, encodeURIComponent).replace(/\s+/g, "+");
+    pb.innerHTML = (
+      '<div id="bugzilla">' +
+      '<input type="button" class="copy" value="Copy" accesskey="C"/> ' +
+      '<a href="' + shortUrl + '" accesskey="H">' + shortUrl + '</a>' +
+      '</div>');
+    pb.querySelector(".copy").addEventListener("click", function bugz_copy() {
+      displayMessage(Utils.clipboard.text = shortUrl, me);
+    }, false);
+  },
+});
+
+CmdUtils.makeSearchCommand({
+  names: ["bing"],
+  url: "http://www.bing.com/search?q=%s",
+  defaultUrl: "http://www.bing.com/",
+  icon: "chrome://ubiquity/skin/icons/bing.ico",
+  parser: {
+    container: "#results li",
+    title: "h3 > a",
+    body: "p",
+    maxResults: 10,
+  },
+});
+
+CmdUtils.makeSearchCommand({
+  names: ["eBay"],
+  url: "http://search.ebay.com/search/search.dll?satitle={QUERY}",
+  defaultUrl: "http://www.ebay.com/",
+  icon: "chrome://ubiquity/skin/icons/ebay.ico",
+  parser: {
+    container: "#ResultSet .li, #ResultSet .pcell, #ResultSet .tri-i",
+    title: ".ttl, a.ittl",
+    body: ".bids, .prc, .tme, .pctr, .fc",
+    thumbnail: ".pic img",
+    maxResults: 30,
+  },
+});
+
+CmdUtils.makeSearchCommand({
+  names: ["Ask.com"],
+  url: "http://www.ask.com/web?q={QUERY}",
+  defaultUrl: "http://www.ask.com/",
+  icon: "chrome://ubiquity/skin/icons/ask.ico",
+  parser: {
+    container: "#teoma-results > div > div",
+    title: ".title",
+    body: ".abstract",
+    maxResults: 10,
+  },
+});
+
+CmdUtils.makeSearchCommand({
+  names: ["Answers.com"],
+  url: "http://www.answers.com/{QUERY}",
+  defaultUrl: "http://www.answers.com",
+  icon: "chrome://ubiquity/skin/icons/answers.ico",
+  parser: {
+    container: "#new_left > a + div",
+    title: ".DsAndEntryName a",
+    body: ".content",
+  },
+});
+
+var formatYelpBusiness = function(biz) {
+  var phone = biz.phone.replace(/(\d\d\d)(\d\d\d)(\d\d\d\d)/, "$1.$2.$3");
+  var name = CmdUtils.renderTemplate('<span class="name"><a href="${url}">${name}</a></span>',biz);
+  return _("${name} in ${city} {if phone}(${phone}){/if} ? ${avg_rating} stars.",
+           {name:name, phone:phone, city: biz.city, avg_rating: biz.avg_rating});
+};
+
+CmdUtils.CreateCommand({
+  names: ["Yelp"],
+  arguments: [
+    {role: "object", label: "restaurant", nountype: noun_type_async_restaurant},
+    {role: "location", nountype: noun_type_geo_town}
+  ],
+  icon: "chrome://ubiquity/skin/icons/yelp.ico",
+  description: "Searches <a href=\"http://www.yelp.com\">Yelp</a> for restaurants matching your words.  Previews the top results.",
+  help: "You can search for restaurants near a certain location using the <i>near</i> modifier.  For example, try &quot;yelp pizza near boston&quot;.",
+  execute: function( args ) {
+    var object = args.object;
+    var location = args.location;
+
+    // if no location was specified, use geolocation
+    var near = "";
+    if (location.text) {
+      near = location.text;
+    } else {
+      var loc = CmdUtils.getGeoLocation();
+      if (loc)
+        near = loc.city + ", " + loc.state;
+    }
+
+    var doc = context.focusedWindow.document;
+    var focused = context.focusedElement;
+
+    if (doc.designMode == "on") {
+      var data = globals.yelp[0];
+
+      var name = CmdUtils.renderTemplate(
+                   "<img style='float:left;margin:5px;border:solid #ccc 5px;' src='${photoUrl}'/><a href='${url}'>${name}</a>",
+                   { url: data.url,
+                     photoUrl: data.photo_url_small,
+                     name: data.name });
+
+      var stars = CmdUtils.renderTemplate(
+                    "<img style='position:relative;top:5px;' src='${starUrl}'/>",
+                    {starUrl: data.rating_img_url});
+
+      var templateParams = { city: data.city, name: name, stars: stars };
+      if( data.neighborhoods.length > 0 ) {
+        templateParams.whereUrl = data.neighborhoods[0].url;
+        templateParams.where = data.neighborhoods[0].name;
+      }
+
+      var msg = _("${name} is a ${stars} restaurant in{if defined('where')} <a href='${whereUrl}'>${where},</a>{/if} ${city}.", templateParams)
+                + "<br/>"
+                + _("It's been reviewed ${times} times.", {times: data.review_count});
+
+      CmdUtils.setSelection( msg );
+      return;
+    }
+
+    var query = object.text;
+    var url = "http://www.yelp.com/search?find_desc={QUERY}&find_loc={NEAR}";
+    url = url.replace( /{QUERY}/g, query);
+    url = url.replace( /{NEAR}/g, near);
+
+    Utils.openUrlInBrowser( url );
+  },
+
+  preview: function( pblock, args ) {
+    var {object, location} = args;
+    var query = object.text;
+    var url = "http://api.yelp.com/business_review_search?";
+
+    if(!query.length && !location.text){
+      pblock.innerHTML = _("Searches yelp for restaurants in your area");
+      return;
+    }
+
+    var near = "";
+    if (location.text) {
+      near = location.text;
+    } else {
+      var loc = CmdUtils.getGeoLocation();
+      if (loc)
+        near = loc.city + ", " + loc.state;
+    }
+
+    var params = {
+      term: query,
+      num_biz_requested: 4,
+      location: near,
+      ywsid: "HbSZ2zXYuMnu1VTImlyA9A"
+    };
+
+    CmdUtils.previewGet( pblock, url, params, function(data) {
+      globals.yelp = data.businesses;
+      pblock.innerHTML = CmdUtils.renderTemplate(
+        feed.dom.getElementById("yelp-search").innerHTML,
+        {businesses: data.businesses,
+         _MODIFIERS: {yelpBusiness: formatYelpBusiness}}
+      );
+    }, "json");
+  }
+});
+
+// -----------------------------------------------------------------
+// WEATHER COMMANDS
+// -----------------------------------------------------------------
+
+var TEMPERATURE_UNITS = ["fahrenheit", "celsius"];
+
+var noun_type_temperature_unit = CmdUtils.NounType("temperature unit",
+                                                   TEMPERATURE_UNITS);
+
+var WEATHER_TYPES = "none|tropical storm|hurricane|severe thunderstorms|thunderstorms|mixed rain and snow|mixed rain and sleet|mixed snow and sleet|freezing drizzle|drizzle|freezing rain|rain|rain|snow flurries|light snow showers|blowing snow|snow|hail|sleet|dust|foggy|haze|smoky|blustery|windy|cold|cloudy|mostly cloudy|mostly cloudy|partly cloudy|partly cloudy|clear|sunny|fair|fair|mixed rain and hail|hot|isolated thunderstorms|scattered thunderstorms|scattered thunderstorms|scattered showers|heavy snow|scattered snow showers|heavy snow|partly cloudy|thundershowers|snow showers|isolated thundershowers".split("|");
+
+var YAHOO_WEATHER_MAP = {
+  "unknown": null,
+  "snow grains": "light snow showers",
+  "ice crystals": "hail",
+  "ice pellets": "hail",
+  mist: "rain",
+  fog: "foggy",
+  smoke: "smoky",
+  "volcanic ash": "haze",
+  "widespread dust": "dust",
+  sand: null,
+  spray: null,
+  "dust whirls": "dust",
+  "showers rain": "rain",
+  sandstorm: null,
+  "low drifting snow": "snow",
+  "low drifting widespread dust": "dust",
+  "low drifting sand": null,
+  "blowing widespread dust": "dust",
+  "blowing sand": null,
+  "rain showers": "scattered showers",
+  "ice pellet showers": "mixed rain and hail",
+  "hail showers": "hail",
+  "small hail showers": "hail",
+  thunderstorm: "thunderstorms",
+  "thunderstorms and rain": "thunderstorms",
+  "thunderstorms and snow": "mixed rain and snow",
+  "thunderstorms and ice pellets": "mixed rain and hail",
+  "thunderstorms with hail": "mixed rain and hail",
+  "thunderstorms with small hail": "mixed rain and hail",
+  "freezing fog": "foggy",
+  "overcast": "cloudy",
+  "scattered clouds": "partly cloudy",
+  "n/a": null,
+  // forcast conditions
+  "flurries": "snow flurries",
+  "freezing rain": "mixed rain and snow",
+  "a thunderstorm": "thunderstorms",
+  hazy: "haze",
+  "mostly sunny": "sunny",
+  "partly sunny": "sunny"
+};
+
+function yahooWeatherImage(condition,dayOrNight) {
+  // dayOrNight must be 'd' or 'n'. By default, it'll be 'd'.
+  var conditionCode = condition.toLowerCase().trim();
+  if (conditionCode != "heavy snow" && conditionCode != "light snow showers")
+    conditionCode = conditionCode.replace(/^(?:heavy|light) /, "");
+  conditionCode = conditionCode.replace(/^chance of /, "");
+
+  // map some Weather Underground weather codes to Yahoo! ones.
+  if (conditionCode in YAHOO_WEATHER_MAP)
+    conditionCode = YAHOO_WEATHER_MAP[conditionCode];
+
+  if (!conditionCode)
+    return null;
+
+  var weatherId = WEATHER_TYPES.indexOf(conditionCode);
+  return ("http://l.yimg.com/us.yimg.com/i/us/nws/weather/gr/" +
+          weatherId + (dayOrNight || "d") + ".png");
+}
+
+function formatLatLon(data) data && data.lat + "," + data.lon;
+
+CmdUtils.CreateCommand({
+  names: ["check weather", "get weather", "weather"],
+  author: {
+    name: "mitcho (Michael Yoshitaka Erlewine)",
+    email: "mitcho@mitcho.com",
+  },
+  contributor: "satyr",
+  arguments: {
+    location: {
+      __proto__: noun_type_geo_town,
+      default: noun_type_geolocation.default,
+    },
+    format: noun_type_temperature_unit,
+  },
+  icon: "chrome://ubiquity/skin/icons/wunderground.ico",
+  description: ("Checks the weather for a given location. It detects your " +
+                "current location as a default."),
+  help: ("Try issuing &quot;weather near chicago&quot;.  It works with " +
+         "zip-codes, too.  You can add 'in celsius' or 'in farenheit' to " +
+         "specify the temperature scale."),
+  execute: function weather_execute({location: {text, data}}) {
+    Utils.openUrlInBrowser(
+      "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=" +
+      encodeURIComponent(formatLatLon(data) || text));
+  },
+  preview: function weather_preview(pblock, {
+    location: {text, data}, format: {text: tempUnit}}) {
+    if (!text) {
+      pblock.innerHTML = _("Gets the weather for a zip code/city.");
+      return;
+    }
+
+    const W4L = _("Weather for ${location}");
+    pblock.innerHTML = (CmdUtils.renderTemplate(W4L, {location: text}) +
+                        " " + Utils.prefs.get("intl.ellipsis", "..."));
+
+    var userLocation = CmdUtils.getGeoLocation();
+    //use either the specified "in" unit or get from geolocation
+    tempUnit = tempUnit || TEMPERATURE_UNITS[
+      +!(userLocation && /^(?:U[SM]|BZ)$/.test(userLocation.country_code))];
+    var xmls = {}, param = {query: formatLatLon(data) || text};
+    ["WXCurrentObXML", "ForecastXML"].forEach(function (api) {
+      CmdUtils.previewGet(
+        pblock,
+        "http://api.wunderground.com/auto/wui/geo/" + api + "/index.xml",
+        param,
+        function (x) { xmls[api] = x; weather_tryToPreview(); },
+        "xml");
+    });
+    function weather_tryToPreview() {
+      var {WXCurrentObXML: weatherXml, ForecastXML: forecastXml} = xmls;
+      if (!weatherXml || !forecastXml) return;
+
+      function qstc(xml, selector) {
+        try{
+        return xml.querySelector(selector).textContent;
+        } catch(e) { Utils.reportInfo(e.stack) }
+      }
+
+      //change wind speed to kmh based on geolocation
+      var windText = qstc(weatherXml, "wind_string");
+      var windSpeed = parseFloat(qstc(weatherXml, "wind_mph"));
+      var windUnit = "mph";
+      //http://en.wikipedia.org/wiki/Si_units
+      if (userLocation) switch (userLocation.country_code) {
+        case "US": case "UM": case "LR": case "MM": case "GB":
+        break;
+        case "JP":
+        windUnit = "m/s";
+        windSpeed *= .45;
+        break;
+        default:
+        windUnit = "km/h";
+        windSpeed *= 1.6;
+      }
+      var [tempChar] = tempUnit, condition = qstc(weatherXml, "weather");
+      var weather = {
+        condition: condition,
+        temp: (qstc(weatherXml, "temp_" + tempChar) +
+               "&#xB0;" + tempChar.toUpperCase()),
+        humidity: qstc(weatherXml, "relative_humidity"),
+        wind: /^\D+/.exec(windText) + windSpeed.toFixed(1) + windUnit,
+        img: yahooWeatherImage(condition),
+        forecast: []
+      };
+
+      $("simpleforecast > forecastday", forecastXml).each(function (i) {
+        var condition = qstc(this, "conditions");
+        weather.forecast.push({
+          label: i ? _("${month}/${day}", {
+            month: qstc(this, "month"),
+            day: qstc(this, "day"),
+          }) : _("today"),
+          condition: condition,
+          img: yahooWeatherImage(condition),
+          high: qstc(this, "high > " + tempUnit),
+          low: qstc(this, "low > " + tempUnit),
+        });
+      });
+
+      var loc = qstc(weatherXml, "display_location > full");
+      pblock.innerHTML = CmdUtils.renderTemplate(
+        feed.dom.getElementById("weather-search").innerHTML, {
+          w: weather, location: loc,
+          weatherMessage: _(W4L, {location: loc}),
+        });
+    }
+  }
+});
+
+CmdUtils.CreateCommand({
+  names: ["define", "get definition"],
+  description: "Gives the meaning of a word, using answers.com.",
+  help: "Try issuing &quot;define aglet&quot;",
+  icon: "chrome://ubiquity/skin/icons/answers.ico",
+  arguments: [{role: "object", nountype: noun_arb_text, label: "word"}],
+  execute: function define_execute({object}) {
+    Utils.openUrlInBrowser("http://www.answers.com/" + encodeURI(object.text));
+  },
+  preview: function define_preview(pblock, {object: {text: word, html}}) {
+    if (!word) return void this.previewDefault(pblock);
+
+    pblock.innerHTML = _("Gives the definition of the word ${word}.",
+                         {word: html});
+    CmdUtils.previewAjax(pblock, {
+      url: ("http://services.aonaware.com/" +
+            "DictService/DictService.asmx/DefineInDict"),
+      data: {
+        word: word,
+        dictId: "wn", // wn: WordNet, gcide: Collaborative Dictionary
+      },
+      success: function define_success(xml) {
+        pblock.innerHTML = (
+          jQuery(xml)
+          .find("WordDefinition > Definitions > Definition:first-child" +
+                " > WordDefinition")
+          .text()
+          .replace(/^\s*.+/, "<h2>$&</h2>")
+          .replace(/\[[^\]]*\]/g, "")
+          .replace(/\d+:/g, "<br/><strong>$&</strong>")
+          .replace(/1:/g, "<br/>$&"));
+      },
+    });
+  }
+});
+const GI_TEMPLATE = '<div id="container${counter}" title="${imgurl}" style="position: absolute; border:0px; " class="thumbnail"><a id="anchor${counter}" href="${imgurl}" accesskey="${directNumber}" style="text-decoration: none;"></a><img id="img${counter}" src="${thumb}" title="${imgurl}" style="position: absolute; height:80px; margin: 5px; border:0px; vertical-align:top; z-index: 0; border: 0px solid #00C600; border-radius: 3px;" alt="."/><canvas id="canvas${counter}" width="${miniwidth}" height="80" style="margin: 5px; border:0px; vertical-align:top; z-index:1000;"></canvas><span id="code${counter}" style="color: #FFFFFF;position:absolute;vertical-align:top;border:0px;margin:5px;z-index:1001;">${directNumber}</span></div>';
+var gGIPageCounter = 0;
+CmdUtils.makeSearchCommand({
+  names: ["google image search", "get images"],
+  arguments: [{role: "object", nountype: noun_arb_text, label: "query"}],
+  version: "0.3.1+",
+  author: {name: "Federico Parodi", email: "getimages@jimmy2k.it"},
+  homepage: "http://www.jimmy2k.it/getimagescommand",
+  license: "MPL",
+  icon: "chrome://ubiquity/skin/icons/google.ico",
+  description: "Browse and embed pictures from Google Images",
+  help: "Press return to show the Google Images results, left click on a picture to watch it, right click to insert it in a text or rich text area",
+  url: "http://images.google.com/images?q={QUERY}",
+  imgsPerPage: 8,
+  previewDelay: 500,
+  preview: function gis_preview(pblock, {object: {text: nameText}}) {
+    if (!nameText) return void this.previewDefault(pblock);
+
+    // keeps track of the page we are previewing
+    gGIPageCounter = 0;
+    // saves the first img of every previewed page
+    var pageArray = [];
+    // saves the first img of the last previewed page
+    var previousResult = 0;
+    function refresh(currentResult, imgsPerPage) {
+      pblock.innerHTML = _("Searching on Google Images...");
+
+      if (currentResult > previousResult)
+        gGIPageCounter++;
+      else
+        gGIPageCounter--;
+
+      previousResult = currentResult;
+      pageArray[gGIPageCounter] = currentResult;
+      var newPageItem = (gGIPageCounter * imgsPerPage) - 8;
+      // This number will be the base for img elements naming.
+      var randomCode = Math.floor(Math.random() * 1000000001);
+      CmdUtils.previewAjax(pblock, {
+        dataType: "json",
+        url: "http://ajax.googleapis.com/ajax/services/search/images",
+        data: {
+          q: nameText,
+          v: "1.0",
+          rsz: "large",
+          start: newPageItem,
+        },
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("referer",
+                               "http://www.jimmy2k.it/getimagescommand");
+        },
+        error: function() {
+          pblock.innerHTML =
+            "<em class='error'>" + _("Connection error") + "</em>";
+        },
+        success: function({responseData}) {
+          function action(e, image) {
+            var rightclick = false;
+            if (e.which) rightclick = (e.which == 3);
+            else if (e.button) rightclick = (e.button == 2);
+
+            if (rightclick)
+              CmdUtils.setSelection(
+                "<img src='" + Utils.escapeHtml(image.title) + "'/>",
+                {text: image.title});
+            else
+              Utils.openUrlInBrowser(image.title);
+          }
+
+          var htmlData = (
+            _('Image Search results for ${text}', {text: nameText}) +
+            '<br><small>' + _('(ctrl + alt + number to open)') + '</small>' +
+            '<div id="resImg" style="position: relative; height:370px;font-size:11pt !important;font-family:Calibri, Helvetica, Verdana, Arial !important;">');
+
+          var numberOfResults = responseData.results.length;
+          if (numberOfResults == 0) {
+            pblock.innerHTML = _('Sorry, there are no results');
+            return;
+          }
+          var resultsArray = responseData.results;
+          for (var index = 0; index < numberOfResults; index++) {
+            htmlData += CmdUtils.renderTemplate(GI_TEMPLATE, {
+              imgurl: resultsArray[index].unescapedUrl,
+              thumb: resultsArray[index].tbUrl,
+              counter: randomCode + index,
+              miniwidth: (80 / resultsArray[index].tbHeight *
+                          resultsArray[index].tbWidth | 0),
+              directNumber: index + 1,
+            });
+          }
+          htmlData += '<div id="controls" style="position: relative; width: 95%; top:270px;"><div id="prev" class="control" style="display:none; float: left;width: 80px; height: 50px; border: 2px solid #00C600; border-radius: 3px; text-align: center; padding-top: 30px; opacity: 0.5">' + _('Prev') + '(9)</div>';
+          if (gGIPageCounter < 8)
+            htmlData += '<div id="next" class="control" style="float: right;width: 80px; height: 50px;  border: 2px solid #00C600; border-radius: 3px; text-align: center; padding-top: 30px; opacity: 0.5">' + _('Next') + '(0)</div></div>';
+          else
+            htmlData += '<div id="next" class="control" style="float: right;width: 80px; height: 50px;  border: 2px solid #00C600; border-radius: 3px; text-align: center; padding-top: 30px; opacity: 0.5">More<br/>on site(0)</div></div>';
+          htmlData += '<form><input id="pButton" type="button" accesskey="9" style="opacity:0; display:none;"/><input id="nButton" type="button" accesskey="0" style="opacity: 0;"/></form></div>';
+          pblock.innerHTML = htmlData;
+          var {ownerDocument} = pblock;
+          var moreButton = jQuery("#next", ownerDocument);
+          var prevButton = jQuery("#prev", ownerDocument);
+          var controls = jQuery(".control", ownerDocument);
+          var prevInputButton = jQuery("#pButton", ownerDocument);
+          // input tags for getting ctrl + number commands
+          var nextInputButton = jQuery("#nButton", ownerDocument);
+
+          if (numberOfResults != 8) moreButton.css("display", "none");
+
+          controls.mouseover(function() {
+            jQuery(this).animate({opacity: 1}, 250);
+          });
+
+          controls.mouseout(function() {
+            jQuery(this).animate({opacity: 0.5}, 250);
+          });
+
+          function prevPage() {
+            refresh(pageArray[gGIPageCounter - 1], imgsPerPage);
+          }
+
+          function nextPage() {
+            if (gGIPageCounter < 8)
+              refresh(currentResult, imgsPerPage);
+            else {
+              Utils.openUrlInBrowser(
+                "http://images.google.com/images?q=" +
+                encodeURIComponent(nameText) + "&start=64");
+              context.chromeWindow.gUbiquity.closeWindow();
+            }
+          }
+
+          moreButton.click(function() {
+            nextPage();
+          });
+
+          nextInputButton.click(function() {
+            nextPage();
+          });
+
+          prevInputButton.click(function() {
+            prevPage();
+          });
+
+          prevButton.click(function() {
+            prevPage();
+          });
+
+          if (gGIPageCounter !== 1) {
+            prevButton.css("display", "inline");
+            prevInputButton.css("display", "inline");
+          }
+
+          var col = 0;
+          var row = 0;
+
+          for (var index = 0; index < numberOfResults; index++) {
+            var imgTag = jQuery("#img" + (randomCode + index), ownerDocument);
+            var containerTag = jQuery("div#container" + (randomCode + index),
+                                      ownerDocument);
+            containerTag.mousedown(function(e) {
+              action(e, this);
+            });
+            // positioning stuff
+            var thisWidth = Math.floor(
+              resultsArray[index].tbWidth / resultsArray[index].tbHeight * 80);
+            if (thisWidth > 470) {
+              thisWidth = 470;
+              imgTag.css("width", thisWidth);
+            }
+
+            if ((col + thisWidth) > 470) {
+              row += 85;
+              col = 0;
+            }
+
+            imgTag.css("left", col);
+            imgTag.css("top", row);
+
+            // zoom in effect
+            var leftBig = Math.floor((thisWidth * -0.0625) + 5);
+
+            containerTag.mouseover(function(e) {
+              if (!e) return;
+              var relTarg = e.relatedTarget;
+              if (relTarg == null) return;
+              // no animation if I'm moving on different parts of the same thumbnail
+              if (relTarg != null && relTarg.id.length >= 4 &&
+                  (relTarg.id.substring(relTarg.id.length - 4,
+                                        relTarg.id.length) ==
+                   e.currentTarget.id.substring(e.currentTarget.id.length - 4,
+                                                e.currentTarget.id.length)))
+                return;
+              var $this = jQuery(this);
+              $this.children("canvas").animate({opacity: 0});
+              $this.children("span").animate({opacity: 0});
+              ($this.children("img")
+               .css("z-index", 1002)
+               .animate({
+                 height: "90px",
+                 marginTop: "0px",
+                 marginLeft: leftBig,
+                 borderWidth: "2px",
+               }, 80));
+            });
+
+            // zoom out effect
+            containerTag.mouseout(function(e) {
+              if (!e) return;
+              var relTarg = e.relatedTarget;
+              // no animation if I'm moving on different parts of the same thumbnail
+              if (relTarg != null && relTarg.id.length >= 4 &&
+                  (relTarg.id.substring(relTarg.id.length - 4,
+                                        relTarg.id.length) ==
+                   e.currentTarget.id.substring(e.currentTarget.id.length - 4,
+                                                e.currentTarget.id.length)))
+                return;
+              var $this = jQuery(this);
+              ($this.children("img")
+               .css("z-index", 0)
+               .animate({
+                 height: "80px",
+                 marginTop: "5px",
+                 marginLeft: "5px",
+                 borderWidth: "0px",
+               }, 80));
+              $this.children("canvas").animate({opacity: 1});
+              $this.children("span").animate({opacity: 1});
+            });
+
+            // green background for numbers on thumbnails
+            var id = "canvas" + (randomCode + index);
+            var canvasEl = pblock.ownerDocument.getElementById(id);
+            var canvas =
+              $(canvasEl).css({left: col, top: row, position: "absolute"});
+
+            var ctx = canvasEl.getContext("2d");
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.lineTo(thisWidth, 0);
+            ctx.lineTo(0, 60);
+            ctx.fill();
+
+            var radgrad = ctx.createRadialGradient(0, 80, 0, 0, 80, 25);
+            radgrad.addColorStop(0, 'rgba(0,230,0,0.8)');
+            radgrad.addColorStop(1, 'rgba(0,198,0,0.8)');
+
+            ctx.fillStyle = radgrad;
+            ctx.beginPath();
+            var x = 0;
+            var y = 80;
+            var radius = 25;
+            var startAngle = 0;
+            var endAngle = 2 * Math.PI;
+            var anticlockwise = false;
+            ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+            ctx.fill();
+
+            // white number position
+            var codeTag = jQuery("#code" + (randomCode + index),
+                                 pblock.ownerDocument);
+            codeTag.css("left", col + 5).css("top", row + 62);
+            col += thisWidth + 5;
+
+            if (row >= 255) {
+              // if image is out of the last line, it hides it and it doesnt' count it
+              imgTag.css("display", "none");
+              canvas.css("display", "none");
+              codeTag.css("display", "none");
+            }
+            else
+              currentResult++;
+          }
+        }
+      });
+    }
+    refresh(1, this.imgsPerPage);
+  }
+});
+
+]]></script>
+</body>
+</html>

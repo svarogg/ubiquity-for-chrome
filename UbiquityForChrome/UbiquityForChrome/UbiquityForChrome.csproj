@@ -1,0 +1,541 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5942956F-ACDD-49AE-A90D-53BFFFC49CD8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UbiquityForChrome</RootNamespace>
+    <AssemblyName>UbiquityForChrome</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="manifest.json" />
+    <None Include="Firefox\.install.rdf.swp" />
+    <None Include="Firefox\chrome.manifest" />
+    <None Include="Firefox\chrome\.DS_Store" />
+    <None Include="Firefox\chrome\content\.DS_Store" />
+    <None Include="Firefox\chrome\content\about.xhtml" />
+    <None Include="Firefox\chrome\content\browser.xul" />
+    <None Include="Firefox\chrome\content\bug19warning.xhtml" />
+    <None Include="Firefox\chrome\content\cmdlist.xhtml" />
+    <None Include="Firefox\chrome\content\confirm-add-command.xhtml" />
+    <None Include="Firefox\chrome\content\console.xul" />
+    <None Include="Firefox\chrome\content\content-preview.xul" />
+    <None Include="Firefox\chrome\content\editor.xhtml" />
+    <None Include="Firefox\chrome\content\file.xhtml" />
+    <None Include="Firefox\chrome\content\internal.dtd" />
+    <None Include="Firefox\chrome\content\localization-template.xhtml" />
+    <None Include="Firefox\chrome\content\playpen.xhtml" />
+    <None Include="Firefox\chrome\content\preferences.xul" />
+    <None Include="Firefox\chrome\content\reset.xhtml" />
+    <None Include="Firefox\chrome\content\settings.xhtml" />
+    <None Include="Firefox\chrome\content\support.xhtml" />
+    <None Include="Firefox\chrome\content\test.xhtml" />
+    <None Include="Firefox\chrome\content\tuner.xhtml" />
+    <None Include="Firefox\chrome\locale\ca\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\ca\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\ca\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\ca\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\ca\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\ca\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\ca\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\cs-CZ\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\cs-CZ\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\cs-CZ\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\cs-CZ\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\cs-CZ\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\cs-CZ\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\cs-CZ\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\de\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\de\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\de\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\de\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\de\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\de\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\de\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\en-US\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\en-US\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\en-US\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\en-US\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\en-US\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\en-US\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\en-US\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\es-ES\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\es-ES\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\es-ES\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\es-ES\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\es-ES\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\es-ES\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\es-ES\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\fi-FI\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\fi-FI\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\fi-FI\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\fi-FI\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\fi-FI\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\fi-FI\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\fi-FI\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\fr\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\fr\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\fr\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\fr\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\fr\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\fr\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\fr\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\fy-NL\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\fy-NL\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\fy-NL\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\fy-NL\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\fy-NL\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\fy-NL\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\fy-NL\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\hu\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\hu\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\hu\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\hu\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\hu\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\hu\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\hu\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\it-IT\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\it-IT\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\it-IT\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\it-IT\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\it-IT\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\it-IT\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\it-IT\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\ja\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\ja\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\ja\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\ja\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\ja\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\ja\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\ja\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\nl\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\nl\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\nl\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\nl\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\nl\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\nl\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\nl\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\pl-PL\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\pl-PL\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\pl-PL\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\pl-PL\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\pl-PL\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\pl-PL\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\pl-PL\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\pt-BR\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\pt-BR\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\pt-BR\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\pt-BR\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\pt-BR\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\pt-BR\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\pt-BR\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\pt-PT\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\pt-PT\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\pt-PT\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\pt-PT\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\pt-PT\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\pt-PT\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\pt-PT\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\ru-RU\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\ru-RU\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\ru-RU\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\ru-RU\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\ru-RU\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\ru-RU\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\ru-RU\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\zh-CN\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\zh-CN\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\zh-CN\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\zh-CN\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\zh-CN\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\zh-CN\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\zh-CN\devubiquity.properties" />
+    <None Include="Firefox\chrome\locale\zh-TW\aboutubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\zh-TW\aboutubiquity.properties" />
+    <None Include="Firefox\chrome\locale\zh-TW\aboutubiquitytutorial.properties" />
+    <None Include="Firefox\chrome\locale\zh-TW\coreubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\zh-TW\coreubiquity.properties" />
+    <None Include="Firefox\chrome\locale\zh-TW\devubiquity.dtd" />
+    <None Include="Firefox\chrome\locale\zh-TW\devubiquity.properties" />
+    <None Include="Firefox\chrome\skin\.DS_Store" />
+    <None Include="Firefox\install.rdf" />
+    <None Include="Firefox\localization\ca\builtincmds.po" />
+    <None Include="Firefox\localization\ca\calendar.po" />
+    <None Include="Firefox\localization\ca\developer.po" />
+    <None Include="Firefox\localization\ca\email.po" />
+    <None Include="Firefox\localization\ca\firefox.po" />
+    <None Include="Firefox\localization\ca\general.po" />
+    <None Include="Firefox\localization\ca\map.po" />
+    <None Include="Firefox\localization\ca\pageedit.po" />
+    <None Include="Firefox\localization\ca\search.po" />
+    <None Include="Firefox\localization\ca\social.po" />
+    <None Include="Firefox\localization\da\builtincmds.po" />
+    <None Include="Firefox\localization\da\calendar.po" />
+    <None Include="Firefox\localization\da\developer.po" />
+    <None Include="Firefox\localization\da\email.po" />
+    <None Include="Firefox\localization\da\firefox.po" />
+    <None Include="Firefox\localization\da\general.po" />
+    <None Include="Firefox\localization\da\map.po" />
+    <None Include="Firefox\localization\da\pageedit.po" />
+    <None Include="Firefox\localization\da\search.po" />
+    <None Include="Firefox\localization\da\social.po" />
+    <None Include="Firefox\localization\de\builtincmds.po" />
+    <None Include="Firefox\localization\de\calendar.po" />
+    <None Include="Firefox\localization\de\developer.po" />
+    <None Include="Firefox\localization\de\email.po" />
+    <None Include="Firefox\localization\de\firefox.po" />
+    <None Include="Firefox\localization\de\general.po" />
+    <None Include="Firefox\localization\de\map.po" />
+    <None Include="Firefox\localization\de\pageedit.po" />
+    <None Include="Firefox\localization\de\search.po" />
+    <None Include="Firefox\localization\de\social.po" />
+    <None Include="Firefox\localization\es\builtincmds.po" />
+    <None Include="Firefox\localization\es\calendar.po" />
+    <None Include="Firefox\localization\es\developer.po" />
+    <None Include="Firefox\localization\es\email.po" />
+    <None Include="Firefox\localization\es\firefox.po" />
+    <None Include="Firefox\localization\es\general.po" />
+    <None Include="Firefox\localization\es\map.po" />
+    <None Include="Firefox\localization\es\pageedit.po" />
+    <None Include="Firefox\localization\es\search.po" />
+    <None Include="Firefox\localization\es\social.po" />
+    <None Include="Firefox\localization\ja\builtincmds.po" />
+    <None Include="Firefox\localization\ja\calendar.po" />
+    <None Include="Firefox\localization\ja\developer.po" />
+    <None Include="Firefox\localization\ja\email.po" />
+    <None Include="Firefox\localization\ja\firefox.po" />
+    <None Include="Firefox\localization\ja\general.po" />
+    <None Include="Firefox\localization\ja\map.po" />
+    <None Include="Firefox\localization\ja\pageedit.po" />
+    <None Include="Firefox\localization\ja\search.po" />
+    <None Include="Firefox\localization\ja\social.po" />
+    <None Include="Firefox\localization\nl\builtincmds.po" />
+    <None Include="Firefox\localization\nl\map.po" />
+    <None Include="Firefox\localization\nl\search.po" />
+    <None Include="Firefox\localization\pt\builtincmds.po" />
+    <None Include="Firefox\localization\pt\calendar.po" />
+    <None Include="Firefox\localization\pt\developer.po" />
+    <None Include="Firefox\localization\pt\email.po" />
+    <None Include="Firefox\localization\pt\firefox.po" />
+    <None Include="Firefox\localization\pt\general.po" />
+    <None Include="Firefox\localization\pt\map.po" />
+    <None Include="Firefox\localization\pt\pageedit.po" />
+    <None Include="Firefox\localization\pt\search.po" />
+    <None Include="Firefox\localization\pt\social.po" />
+    <None Include="Firefox\localization\tr\builtincmds.po" />
+    <None Include="Firefox\localization\tr\calendar.po" />
+    <None Include="Firefox\localization\tr\developer.po" />
+    <None Include="Firefox\localization\tr\email.po" />
+    <None Include="Firefox\localization\tr\firefox.po" />
+    <None Include="Firefox\localization\tr\general.po" />
+    <None Include="Firefox\localization\tr\map.po" />
+    <None Include="Firefox\localization\tr\pageedit.po" />
+    <None Include="Firefox\localization\tr\search.po" />
+    <None Include="Firefox\localization\tr\social.po" />
+    <None Include="Firefox\modules\.DS_Store" />
+    <None Include="Firefox\modules\parser\new\parser_registry.json" />
+    <None Include="Firefox\scripts\.DS_Store" />
+    <None Include="Firefox\scripts\gettext\Changes" />
+    <None Include="Firefox\scripts\gettext\COPYING.LESSER" />
+    <None Include="Firefox\scripts\gettext\README" />
+    <None Include="Firefox\standard-feeds\search.xhtml" />
+    <None Include="Firefox\tests\test_all.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CmdUtil.js" />
+    <Content Include="Command.js" />
+    <Content Include="constants.js" />
+    <Content Include="jquery-1.8.0.min.js" />
+    <Content Include="ubiquity.js" />
+    <Content Include="Firefox\builtin-feeds\builtincmds.js" />
+    <Content Include="Firefox\chrome\content\browser.js" />
+    <Content Include="Firefox\chrome\content\cmdlist.js" />
+    <Content Include="Firefox\chrome\content\command-template.js" />
+    <Content Include="Firefox\chrome\content\confirm-add-command.js" />
+    <Content Include="Firefox\chrome\content\console.js" />
+    <Content Include="Firefox\chrome\content\content-preview.css" />
+    <Content Include="Firefox\chrome\content\demo.css" />
+    <Content Include="Firefox\chrome\content\demo.html" />
+    <Content Include="Firefox\chrome\content\demo.js" />
+    <Content Include="Firefox\chrome\content\developer-news.js" />
+    <Content Include="Firefox\chrome\content\editor.js" />
+    <Content Include="Firefox\chrome\content\export-config.js" />
+    <Content Include="Firefox\chrome\content\header.js" />
+    <Content Include="Firefox\chrome\content\hiddenframe.html" />
+    <Content Include="Firefox\chrome\content\localization-template.js" />
+    <Content Include="Firefox\chrome\content\playpen.css" />
+    <Content Include="Firefox\chrome\content\playpen.js" />
+    <Content Include="Firefox\chrome\content\popupmenu.js" />
+    <Content Include="Firefox\chrome\content\report-bug.css" />
+    <Content Include="Firefox\chrome\content\report-bug.html" />
+    <Content Include="Firefox\chrome\content\report-bug.js" />
+    <Content Include="Firefox\chrome\content\settings.js" />
+    <Content Include="Firefox\chrome\content\sugg-memory-display.html" />
+    <Content Include="Firefox\chrome\content\suggest.html" />
+    <Content Include="Firefox\chrome\content\test.css" />
+    <Content Include="Firefox\chrome\content\tuner.css" />
+    <Content Include="Firefox\chrome\content\tuner.js" />
+    <Content Include="Firefox\chrome\content\tutorial.js" />
+    <Content Include="Firefox\chrome\content\ubiquity.js" />
+    <Content Include="Firefox\chrome\content\ubiquityError.css" />
+    <Content Include="Firefox\chrome\content\web-content.css" />
+    <Content Include="Firefox\chrome\skin\browser.css" />
+    <Content Include="Firefox\chrome\skin\buttons\grad.png" />
+    <Content Include="Firefox\chrome\skin\icons\amazon.ico" />
+    <Content Include="Firefox\chrome\skin\icons\answers.ico" />
+    <Content Include="Firefox\chrome\skin\icons\application_view_list.png" />
+    <Content Include="Firefox\chrome\skin\icons\arrow_out.png" />
+    <Content Include="Firefox\chrome\skin\icons\arrow_redo.png" />
+    <Content Include="Firefox\chrome\skin\icons\arrow_refresh.png" />
+    <Content Include="Firefox\chrome\skin\icons\arrow_undo.png" />
+    <Content Include="Firefox\chrome\skin\icons\ask.ico" />
+    <Content Include="Firefox\chrome\skin\icons\bing.ico" />
+    <Content Include="Firefox\chrome\skin\icons\calculator.png" />
+    <Content Include="Firefox\chrome\skin\icons\calendar.png" />
+    <Content Include="Firefox\chrome\skin\icons\calendar_add.png" />
+    <Content Include="Firefox\chrome\skin\icons\calendar_google.ico" />
+    <Content Include="Firefox\chrome\skin\icons\cmd_entry_bg.png" />
+    <Content Include="Firefox\chrome\skin\icons\color_wheel.png" />
+    <Content Include="Firefox\chrome\skin\icons\convert.png" />
+    <Content Include="Firefox\chrome\skin\icons\delete.png" />
+    <Content Include="Firefox\chrome\skin\icons\delicious.ico" />
+    <Content Include="Firefox\chrome\skin\icons\digg.ico" />
+    <Content Include="Firefox\chrome\skin\icons\ebay.ico" />
+    <Content Include="Firefox\chrome\skin\icons\email.png" />
+    <Content Include="Firefox\chrome\skin\icons\email_open.png" />
+    <Content Include="Firefox\chrome\skin\icons\exit_stop.png" />
+    <Content Include="Firefox\chrome\skin\icons\favicon.ico" />
+    <Content Include="Firefox\chrome\skin\icons\flickr.ico" />
+    <Content Include="Firefox\chrome\skin\icons\folder_star.png" />
+    <Content Include="Firefox\chrome\skin\icons\german_flag.png" />
+    <Content Include="Firefox\chrome\skin\icons\google.ico" />
+    <Content Include="Firefox\chrome\skin\icons\help.png" />
+    <Content Include="Firefox\chrome\skin\icons\home_house.png" />
+    <Content Include="Firefox\chrome\skin\icons\html_go.png" />
+    <Content Include="Firefox\chrome\skin\icons\imdb.ico" />
+    <Content Include="Firefox\chrome\skin\icons\jquery.ico" />
+    <Content Include="Firefox\chrome\skin\icons\left_arrow.png" />
+    <Content Include="Firefox\chrome\skin\icons\magnifier.png" />
+    <Content Include="Firefox\chrome\skin\icons\map.png" />
+    <Content Include="Firefox\chrome\skin\icons\map_add.png" />
+    <Content Include="Firefox\chrome\skin\icons\mozilla.ico" />
+    <Content Include="Firefox\chrome\skin\icons\page_code.png" />
+    <Content Include="Firefox\chrome\skin\icons\page_delete.png" />
+    <Content Include="Firefox\chrome\skin\icons\page_edit.png" />
+    <Content Include="Firefox\chrome\skin\icons\page_lightning.png" />
+    <Content Include="Firefox\chrome\skin\icons\page_refresh.png" />
+    <Content Include="Firefox\chrome\skin\icons\page_save.png" />
+    <Content Include="Firefox\chrome\skin\icons\plugin_edit.png" />
+    <Content Include="Firefox\chrome\skin\icons\script_lightning.png" />
+    <Content Include="Firefox\chrome\skin\icons\search.png" />
+    <Content Include="Firefox\chrome\skin\icons\selected_bg.png" />
+    <Content Include="Firefox\chrome\skin\icons\stop.png" />
+    <Content Include="Firefox\chrome\skin\icons\suggestion_bd.png" />
+    <Content Include="Firefox\chrome\skin\icons\sum.png" />
+    <Content Include="Firefox\chrome\skin\icons\tab_delete.png" />
+    <Content Include="Firefox\chrome\skin\icons\tab_go.png" />
+    <Content Include="Firefox\chrome\skin\icons\textfield_rename.png" />
+    <Content Include="Firefox\chrome\skin\icons\text_bold.png" />
+    <Content Include="Firefox\chrome\skin\icons\text_italic.png" />
+    <Content Include="Firefox\chrome\skin\icons\text_underline.png" />
+    <Content Include="Firefox\chrome\skin\icons\tinyurl.ico" />
+    <Content Include="Firefox\chrome\skin\icons\translate_bing.ico" />
+    <Content Include="Firefox\chrome\skin\icons\translate_google.ico" />
+    <Content Include="Firefox\chrome\skin\icons\tuner-scale.png" />
+    <Content Include="Firefox\chrome\skin\icons\tuner-top.png" />
+    <Content Include="Firefox\chrome\skin\icons\twitter.ico" />
+    <Content Include="Firefox\chrome\skin\icons\ubiquibot-square.png" />
+    <Content Include="Firefox\chrome\skin\icons\ubiquibot24.png" />
+    <Content Include="Firefox\chrome\skin\icons\union_jack.ico" />
+    <Content Include="Firefox\chrome\skin\icons\videosurf.ico" />
+    <Content Include="Firefox\chrome\skin\icons\wikipedia.ico" />
+    <Content Include="Firefox\chrome\skin\icons\wunderground.ico" />
+    <Content Include="Firefox\chrome\skin\icons\yahoo.ico" />
+    <Content Include="Firefox\chrome\skin\icons\yelp.ico" />
+    <Content Include="Firefox\chrome\skin\icons\youtube.ico" />
+    <Content Include="Firefox\chrome\skin\skins\custom.css" />
+    <Content Include="Firefox\chrome\skin\skins\default.css" />
+    <Content Include="Firefox\chrome\skin\skins\experimental.css" />
+    <Content Include="Firefox\chrome\skin\skins\old.css" />
+    <Content Include="Firefox\components\about.js" />
+    <Content Include="Firefox\components\commandline.js" />
+    <Content Include="Firefox\components\protocol.js" />
+    <Content Include="Firefox\defaults\preferences\preferences.js" />
+    <Content Include="Firefox\feed-parts\footer\final.js" />
+    <Content Include="Firefox\feed-parts\header\initial.js" />
+    <Content Include="Firefox\index.html" />
+    <Content Include="Firefox\modules\annotation_memory.js" />
+    <Content Include="Firefox\modules\cmdhistory.js" />
+    <Content Include="Firefox\modules\cmdmanager.js" />
+    <Content Include="Firefox\modules\cmdutils.js" />
+    <Content Include="Firefox\modules\codesource.js" />
+    <Content Include="Firefox\modules\contextutils.js" />
+    <Content Include="Firefox\modules\dbutils.js" />
+    <Content Include="Firefox\modules\default_feed_plugin.js" />
+    <Content Include="Firefox\modules\eventhub.js" />
+    <Content Include="Firefox\modules\feedaggregator.js" />
+    <Content Include="Firefox\modules\feedmanager.js" />
+    <Content Include="Firefox\modules\feed_plugin_utils.js" />
+    <Content Include="Firefox\modules\hiddenbrowser.js" />
+    <Content Include="Firefox\modules\localization_utils.js" />
+    <Content Include="Firefox\modules\locked_down_feed_plugin.js" />
+    <Content Include="Firefox\modules\msgservice.js" />
+    <Content Include="Firefox\modules\nountypes.js" />
+    <Content Include="Firefox\modules\nounutils.js" />
+    <Content Include="Firefox\modules\oauth.js" />
+    <Content Include="Firefox\modules\parser\new\%24.js" />
+    <Content Include="Firefox\modules\parser\new\ca.js" />
+    <Content Include="Firefox\modules\parser\new\da.js" />
+    <Content Include="Firefox\modules\parser\new\de.js" />
+    <Content Include="Firefox\modules\parser\new\en.js" />
+    <Content Include="Firefox\modules\parser\new\es.js" />
+    <Content Include="Firefox\modules\parser\new\fr.js" />
+    <Content Include="Firefox\modules\parser\new\it.js" />
+    <Content Include="Firefox\modules\parser\new\ja.js" />
+    <Content Include="Firefox\modules\parser\new\namespace.js" />
+    <Content Include="Firefox\modules\parser\new\nl.js" />
+    <Content Include="Firefox\modules\parser\new\parser.js" />
+    <Content Include="Firefox\modules\parser\new\pt.js" />
+    <Content Include="Firefox\modules\parser\new\sv.js" />
+    <Content Include="Firefox\modules\parser\new\tr.js" />
+    <Content Include="Firefox\modules\parser\new\zh.js" />
+    <Content Include="Firefox\modules\parser\original\locale_en.js" />
+    <Content Include="Firefox\modules\parser\original\parser.js" />
+    <Content Include="Firefox\modules\parser\parser.js" />
+    <Content Include="Firefox\modules\prefcommands.js" />
+    <Content Include="Firefox\modules\prefkeys.js" />
+    <Content Include="Firefox\modules\preview_browser.js" />
+    <Content Include="Firefox\modules\sandboxfactory.js" />
+    <Content Include="Firefox\modules\setup.js" />
+    <Content Include="Firefox\modules\skin_feed_plugin.js" />
+    <Content Include="Firefox\modules\suggestion_memory.js" />
+    <Content Include="Firefox\modules\ubiquity_protocol.js" />
+    <Content Include="Firefox\modules\utils.js" />
+    <Content Include="Firefox\modules\webjsm.js" />
+    <Content Include="Firefox\modules\xmlsax.js" />
+    <Content Include="Firefox\modules\xml_script_commands_parser.js" />
+    <Content Include="Firefox\preview.html" />
+    <Content Include="Firefox\scripts\content-preview.js" />
+    <Content Include="Firefox\scripts\date.js" />
+    <Content Include="Firefox\scripts\docs\docs.css" />
+    <Content Include="Firefox\scripts\docs\docs.js" />
+    <Content Include="Firefox\scripts\gettext\lib\Gettext.js" />
+    <Content Include="Firefox\scripts\html-sanitizer-minified.js" />
+    <Content Include="Firefox\scripts\jquery.js" />
+    <Content Include="Firefox\scripts\jquery_setup.js" />
+    <Content Include="Firefox\scripts\prettify.css" />
+    <Content Include="Firefox\scripts\prettify.js" />
+    <Content Include="Firefox\scripts\template.js" />
+    <Content Include="Firefox\scripts\wikicreole.js" />
+    <Content Include="Firefox\standard-feeds\alias-commands.html" />
+    <Content Include="Firefox\standard-feeds\alias-commands.js" />
+    <Content Include="Firefox\standard-feeds\calendar.html" />
+    <Content Include="Firefox\standard-feeds\calendar.js" />
+    <Content Include="Firefox\standard-feeds\core-developer-commands.html" />
+    <Content Include="Firefox\standard-feeds\core-developer-commands.js" />
+    <Content Include="Firefox\standard-feeds\developer.html" />
+    <Content Include="Firefox\standard-feeds\developer.js" />
+    <Content Include="Firefox\standard-feeds\email.html" />
+    <Content Include="Firefox\standard-feeds\email.js" />
+    <Content Include="Firefox\standard-feeds\feed.js" />
+    <Content Include="Firefox\standard-feeds\firefox.html" />
+    <Content Include="Firefox\standard-feeds\firefox.js" />
+    <Content Include="Firefox\standard-feeds\general.html" />
+    <Content Include="Firefox\standard-feeds\general.js" />
+    <Content Include="Firefox\standard-feeds\locked-down-feed-plugin\example.html" />
+    <Content Include="Firefox\standard-feeds\locked-down-feed-plugin\example.js" />
+    <Content Include="Firefox\standard-feeds\map.html" />
+    <Content Include="Firefox\standard-feeds\map.js" />
+    <Content Include="Firefox\standard-feeds\pageedit.html" />
+    <Content Include="Firefox\standard-feeds\pageedit.js" />
+    <Content Include="Firefox\standard-feeds\social.html" />
+    <Content Include="Firefox\standard-feeds\social.js" />
+    <Content Include="Firefox\standard-feeds\standard-feeds.css" />
+    <Content Include="Firefox\standard-feeds\templates\map.html" />
+    <Content Include="Firefox\standard-feeds\templates\map.js" />
+    <Content Include="Firefox\tests\framework.js" />
+    <Content Include="Firefox\tests\systemtests.js" />
+    <Content Include="Firefox\tests\testing_stubs.js" />
+    <Content Include="Firefox\tests\test_all.js" />
+    <Content Include="Firefox\tests\test_annotation_memory.js" />
+    <Content Include="Firefox\tests\test_eventhub.js" />
+    <Content Include="Firefox\tests\test_hiddenbrowser.js" />
+    <Content Include="Firefox\tests\test_parser1.js" />
+    <Content Include="Firefox\tests\test_parser2.js" />
+    <Content Include="Firefox\tests\test_suggestion_memory.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>25308</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
