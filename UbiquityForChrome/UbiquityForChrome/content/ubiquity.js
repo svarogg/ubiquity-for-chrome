@@ -29,7 +29,6 @@ function createPopup() {
     $('html').click(function() {
         hidePopup();
     });
-
     $('#ubiquity-popup').click(function(event){
         event.stopPropagation();
     });

@@ -371,7 +371,7 @@ CmdUtils.CreateCommand({
     var name = goal.text
       , phtml = _("Translates the selected text:")
     pblock.innerHTML = phtml + " ..."
-    translate(
+     (
       object, source.data || "", goal.data,
       CmdUtils.previewCallback(pblock, function show(html) {
         pblock.innerHTML = phtml + "<br><br>" + html
